@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connectly | Social Discovery</title>
+  <title>Connectly - Profile Photos & Gallery</title>
   <style>
     * {
       margin: 0;
@@ -14,48 +14,35 @@
     body {
       background: #0A0A0E;
       color: #EAEAEF;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 20px;
     }
 
-    /* Navbar */
+    /* Header */
     nav {
       background: rgba(10,10,14,0.95);
-      backdrop-filter: blur(10px);
       border-bottom: 1px solid #222;
       padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      margin-bottom: 30px;
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
-      cursor: pointer;
-    }
-
-    .token-badge {
-      background: #16161F;
-      border: 1px solid #2C2C38;
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      cursor: pointer;
     }
 
     .btn {
@@ -64,13 +51,6 @@
       border: none;
       cursor: pointer;
       font-weight: 500;
-      font-size: 0.85rem;
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid #2C2C38;
-      color: #9A9AAB;
     }
 
     .btn-primary {
@@ -78,193 +58,261 @@
       color: white;
     }
 
-    .btn-primary:hover {
-      background: #6E6E86;
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #3A3A4A;
+      color: #EAEAEF;
     }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      border-bottom: 1px solid #222;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      color: #9A9AAB;
+    /* Auth Cards */
+    .auth-container {
       max-width: 500px;
-      margin: 0 auto 25px;
+      margin: 0 auto;
     }
 
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 40px;
-      padding-top: 30px;
-      border-top: 1px solid #222;
+    .card {
+      background: #12121A;
+      border: 1px solid #2C2C38;
+      border-radius: 20px;
+      padding: 30px;
     }
 
-    .stat-value {
-      font-size: 1.6rem;
-      font-weight: 600;
+    h2, h3 {
+      margin-bottom: 10px;
     }
 
-    .stat-label {
-      font-size: 0.7rem;
-      color: #6A6A7A;
-    }
-
-    /* Filters */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin: 30px 0 20px;
-    }
-
-    .filter {
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
       background: #16161F;
       border: 1px solid #2C2C38;
-      padding: 6px 18px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-
-    .filter.active {
-      background: #3A3A4A;
+      border-radius: 10px;
       color: white;
+      font-size: 1rem;
     }
 
-    /* Profile Grid */
-    .profiles {
+    .message {
+      padding: 12px;
+      border-radius: 10px;
+      margin: 15px 0;
+      font-size: 0.85rem;
+    }
+
+    .error { background: #B85C5C; color: white; }
+    .success { background: #5A8F7C; color: white; }
+    .info { background: #3A3A4A; color: white; }
+
+    /* Dashboard */
+    .dashboard {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: 280px 1fr;
       gap: 20px;
-      margin: 30px 0;
+    }
+
+    .sidebar {
+      background: #12121A;
+      border: 1px solid #2C2C38;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .main-content {
+      background: #12121A;
+      border: 1px solid #2C2C38;
+      border-radius: 16px;
+      padding: 20px;
+      min-height: 500px;
     }
 
     .profile-card {
-      background: #12121A;
-      border: 1px solid #222;
-      border-radius: 16px;
+      text-align: center;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #2C2C38;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      background: #16161F;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 10px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      padding: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .avatar:hover .avatar-overlay {
+      opacity: 1;
+    }
+
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .person-card {
+      background: #16161F;
+      border: 1px solid #2C2C38;
+      border-radius: 12px;
+      padding: 15px;
       cursor: pointer;
       transition: transform 0.2s;
     }
 
-    .profile-card:hover {
+    .person-card:hover {
       transform: translateY(-3px);
     }
 
-    .profile-banner {
-      height: 100px;
+    .person-avatar {
+      width: 60px;
+      height: 60px;
       background: #16161F;
-      border-bottom: 1px solid #222;
-      position: relative;
-    }
-
-    .avatar {
-      position: absolute;
-      bottom: -30px;
-      left: 20px;
-      width: 65px;
-      height: 65px;
-      background: #0A0A0E;
       border-radius: 50%;
-      border: 3px solid #12121A;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
+      margin-bottom: 10px;
+      overflow: hidden;
     }
 
-    .profile-info {
-      padding: 40px 15px 15px;
+    .person-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .username {
-      font-weight: 600;
-      font-size: 1rem;
+    /* Gallery Styles */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
     }
 
-    .location {
+    .gallery-item {
+      aspect-ratio: 1;
+      background: #16161F;
+      border: 1px solid #2C2C38;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-item .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(184,92,92,0.9);
+      border: none;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item .delete-btn:hover {
+      background: #B85C5C;
+    }
+
+    .add-photo-btn {
+      background: #16161F;
+      border: 2px dashed #3A3A4A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .add-photo-btn:hover {
+      border-color: #5A5A72;
+      background: #1A1A22;
+    }
+
+    .add-photo-btn span {
+      font-size: 2rem;
+    }
+
+    .unverified-badge {
+      background: #B85C5C;
+      padding: 2px 8px;
+      border-radius: 50px;
       font-size: 0.7rem;
-      color: #6A6A7A;
-      margin: 5px 0 8px;
+      margin-left: 8px;
     }
 
-    .bio {
-      font-size: 0.75rem;
-      color: #9A9AAB;
+    .verified-badge {
+      background: #5A8F7C;
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      margin-left: 8px;
     }
 
-    /* Modal */
-    .modal {
+    /* Modal for viewing photos */
+    .lightbox-modal {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
-      z-index: 200;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
 
-    .modal.active {
+    .lightbox-modal.active {
       display: flex;
     }
 
-    .modal-content {
-      background: #101016;
-      border: 1px solid #2C2C38;
-      border-radius: 20px;
-      max-width: 500px;
-      width: 90%;
-      padding: 30px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: #16161F;
-      border: none;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      color: white;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      background: #16161F;
-      border: 1px solid #2C2C38;
-      border-radius: 10px;
-      color: white;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #3A3A4A;
-      padding: 10px 20px;
-      border-radius: 50px;
-      display: none;
-      z-index: 300;
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
     }
 
     footer {
@@ -272,294 +320,568 @@
       padding: 30px;
       border-top: 1px solid #222;
       color: #6A6A7A;
-      font-size: 0.75rem;
+      margin-top: 40px;
     }
 
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 1.8rem; }
-      .stats { gap: 20px; }
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="container nav-inner">
-    <div class="logo" onclick="location.reload()">❤️ CONNECTLY</div>
-    <div style="display: flex; gap: 15px; align-items: center;">
-      <div class="token-badge" id="tokenDisplay" onclick="openShop()">🪙 0</div>
-      <button class="btn btn-outline" id="authBtn" onclick="openAuth()">Join</button>
+  <div class="nav-inner">
+    <div class="logo">📸 CONNECTLY</div>
+    <div id="navButtons">
+      <button class="btn btn-outline" onclick="showAuthModal()">Sign In / Join</button>
     </div>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="container">
-    <h1>Find your people</h1>
-    <p>A space for genuine connections, friendships, and relationships</p>
-    <button class="btn btn-primary" onclick="openAuth()">Get Started →</button>
-    <div class="stats">
-      <div><div class="stat-value" id="memberCount">0</div><div class="stat-label">Members</div></div>
-      <div><div class="stat-value" id="onlineCount">0</div><div class="stat-label">Online</div></div>
+<div class="container">
+  <!-- Auth Modal (hidden until needed) -->
+  <div id="authModal" class="auth-container" style="display: none;">
+    <div class="card">
+      <h3 id="authTitle">Create Account</h3>
+      <div id="regForm">
+        <input type="text" id="regName" placeholder="Full name">
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="email" id="regEmail" placeholder="Email">
+        <input type="password" id="regPassword" placeholder="Password">
+        <input type="text" id="regLocation" placeholder="City">
+        <input type="number" id="regAge" placeholder="Age 18+">
+        <select id="regInterest">
+          <option>Dating</option><option>Friendship</option><option>Networking</option><option>Community</option>
+        </select>
+        <textarea id="regBio" placeholder="Tell people about yourself..." rows="2"></textarea>
+        <label style="display: flex; gap: 8px; margin: 10px 0;">
+          <input type="checkbox" id="ageCheck"> I am 18+ years old
+        </label>
+        <button class="btn btn-primary" style="width:100%" onclick="register()">Create Account</button>
+        <p style="text-align:center; margin-top:15px">Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a></p>
+      </div>
+      <div id="loginForm" style="display:none">
+        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button class="btn btn-primary" style="width:100%; margin-top:15px" onclick="login()">Sign In</button>
+        <p style="text-align:center; margin-top:15px">New? <a href="#" onclick="switchToRegister()">Create Account</a></p>
+      </div>
+      <div id="verificationMessage" style="margin-top: 15px;"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard (shown after login) -->
+  <div id="dashboard" style="display: none;">
+    <div class="dashboard">
+      <div class="sidebar">
+        <div class="profile-card">
+          <div class="avatar" id="sidebarAvatar" onclick="document.getElementById('profilePicInput').click()">
+            <img id="profilePreview" src="" alt="Profile" style="display: none;">
+            <span id="avatarPlaceholder">👤</span>
+            <div class="avatar-overlay">Change Photo</div>
+          </div>
+          <input type="file" id="profilePicInput" accept="image/*" style="display: none;" onchange="uploadProfilePicture(this)">
+          <h4 id="sidebarName"></h4>
+          <p id="sidebarLocation" style="color:#6A6A7A; font-size:0.8rem;"></p>
+          <div id="verificationStatus"></div>
+        </div>
+        <div style="margin-top: 20px;">
+          <div class="btn btn-outline" style="width:100%; margin-bottom:10px; text-align:center;" onclick="showPeople()">👥 Browse People</div>
+          <div class="btn btn-outline" style="width:100%; margin-bottom:10px; text-align:center;" onclick="showProfile()">✏️ Edit Profile</div>
+          <div class="btn btn-outline" style="width:100%; margin-bottom:10px; text-align:center;" onclick="showMyGallery()">📸 My Gallery</div>
+          <div class="btn btn-outline" style="width:100%; text-align:center; color:#B85C5C;" onclick="logout()">🚪 Logout</div>
+        </div>
+      </div>
+      <div class="main-content" id="mainContent"></div>
     </div>
   </div>
 </div>
 
-<div class="container">
-  <div class="filters" id="filters"></div>
-  <div class="profiles" id="profiles"></div>
+<!-- Lightbox Modal for viewing photos -->
+<div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+  <img id="lightboxImg" class="lightbox-img" src="">
 </div>
 
 <footer>
-  <p>© 2024 Connectly · 18+ Only · Be Kind, Be Real</p>
+  <p>© 2024 Connectly · 18+ Only · Upload photos to show your personality!</p>
 </footer>
 
-<!-- Auth Modal -->
-<div id="authModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeAuth()">✕</button>
-    <h3 id="authTitle">Create Account</h3>
-    <div id="regForm">
-      <input type="text" id="name" placeholder="Full name">
-      <input type="text" id="username" placeholder="Username">
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
-      <input type="text" id="location" placeholder="City">
-      <input type="number" id="age" placeholder="Age 18+">
-      <select id="interest">
-        <option>Dating</option><option>Friendship</option><option>Networking</option>
-      </select>
-      <textarea id="bio" placeholder="Tell us about yourself..." rows="2"></textarea>
-      <label style="display: flex; gap: 8px; margin: 10px 0;">
-        <input type="checkbox" id="ageCheck"> I am 18+ years old
-      </label>
-      <button class="btn btn-primary" style="width:100%" onclick="register()">Join</button>
-      <p style="text-align:center; margin-top:15px">Have an account? <a href="#" onclick="switchLogin()">Sign In</a></p>
-    </div>
-    <div id="loginForm" style="display:none">
-      <input type="email" id="loginEmail" placeholder="Email">
-      <input type="password" id="loginPass" placeholder="Password">
-      <button class="btn btn-primary" style="width:100%; margin-top:15px" onclick="login()">Sign In</button>
-      <p style="text-align:center; margin-top:15px">New? <a href="#" onclick="switchRegister()">Create Account</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- Profile View Modal -->
-<div id="profileModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeProfile()">✕</button>
-    <div id="profileView"></div>
-  </div>
-</div>
-
-<!-- Shop Modal -->
-<div id="shopModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeShop()">✕</button>
-    <h3>🪙 Buy Credits</h3>
-    <div style="margin: 15px 0">
-      <div style="display:flex; justify-content:space-between; padding:10px; background:#16161F; border-radius:10px; margin:8px 0">
-        <span>50 credits</span><span>$4.99</span><button class="btn btn-outline" onclick="buy(50,4.99)">Buy</button>
-      </div>
-      <div style="display:flex; justify-content:space-between; padding:10px; background:#16161F; border-radius:10px; margin:8px 0">
-        <span>250 credits</span><span>$19.99</span><button class="btn btn-outline" onclick="buy(250,19.99)">Buy</button>
-      </div>
-      <div style="display:flex; justify-content:space-between; padding:10px; background:#16161F; border-radius:10px; margin:8px 0">
-        <span>750 credits</span><span>$49.99</span><button class="btn btn-outline" onclick="buy(750,49.99)">Buy</button>
-      </div>
-    </div>
-    <button class="btn btn-primary" style="width:100%" onclick="subscribe()">Subscribe $9.99/mo → Unlimited</button>
-  </div>
-</div>
-
-<div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
+  // ============ CONFIGURATION ============
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY_HERE";
+  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID_HERE";  
+  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID_HERE";
+  
+  let emailJSReady = false;
+  if (EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY_HERE") {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    emailJSReady = true;
+  }
+  
+  // ============ DATA STORAGE ============
   let currentUser = null;
   let users = [];
-  let messages = [];
-
-  function load() {
-    const stored = localStorage.getItem('connectly_users');
+  let pendingVerifications = {};
+  
+  function loadData() {
+    const stored = localStorage.getItem('connectly_users_verified');
     users = stored ? JSON.parse(stored) : [];
-    const logged = localStorage.getItem('connectly_user');
-    if (logged) currentUser = JSON.parse(logged);
-    update();
-    render();
-  }
-
-  function save() {
-    localStorage.setItem('connectly_users', JSON.stringify(users));
-    if (currentUser) localStorage.setItem('connectly_user', JSON.stringify(currentUser));
-    else localStorage.removeItem('connectly_user');
-  }
-
-  function update() {
-    document.getElementById('memberCount').innerText = users.length;
-    document.getElementById('onlineCount').innerText = users.filter(u => u.online).length;
-    if (currentUser) {
-      document.getElementById('tokenDisplay').innerHTML = `🪙 ${currentUser.tokens}`;
-      document.getElementById('authBtn').innerHTML = currentUser.username;
+    const logged = localStorage.getItem('connectly_current_user');
+    if (logged) {
+      currentUser = JSON.parse(logged);
+      showDashboard();
+      loadPeople();
     } else {
-      document.getElementById('tokenDisplay').innerHTML = `🪙 0`;
-      document.getElementById('authBtn').innerHTML = 'Join';
+      showAuthModal();
     }
+  }
+  
+  function saveData() {
+    localStorage.setItem('connectly_users_verified', JSON.stringify(users));
+    if (currentUser) {
+      localStorage.setItem('connectly_current_user', JSON.stringify(currentUser));
+    }
+  }
+  
+  // ============ PHOTO UPLOAD FUNCTIONS ============
+  function uploadProfilePicture(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageData = e.target.result;
+        currentUser.profilePicture = imageData;
+        currentUser.avatar = ''; // Clear text avatar
+        
+        // Update in users array
+        const userIndex = users.findIndex(u => u.id === currentUser.id);
+        if (userIndex !== -1) {
+          users[userIndex].profilePicture = imageData;
+          users[userIndex].avatar = '';
+        }
+        saveData();
+        
+        // Update UI
+        updateProfileDisplay();
+        showMessage("Profile picture updated!", "success");
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  
+  function uploadGalleryPhoto(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageData = e.target.result;
+        if (!currentUser.gallery) {
+          currentUser.gallery = [];
+        }
+        currentUser.gallery.push(imageData);
+        
+        // Update in users array
+        const userIndex = users.findIndex(u => u.id === currentUser.id);
+        if (userIndex !== -1) {
+          users[userIndex].gallery = currentUser.gallery;
+        }
+        saveData();
+        
+        showMessage("Photo added to your gallery!", "success");
+        showMyGallery(); // Refresh gallery view
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  
+  function removeGalleryPhoto(index) {
+    if (confirm("Remove this photo from your gallery?")) {
+      currentUser.gallery.splice(index, 1);
+      const userIndex = users.findIndex(u => u.id === currentUser.id);
+      if (userIndex !== -1) {
+        users[userIndex].gallery = currentUser.gallery;
+      }
+      saveData();
+      showMyGallery(); // Refresh gallery view
+      showMessage("Photo removed", "info");
+    }
+  }
+  
+  function viewProfilePhotos(user) {
+    const content = document.getElementById('mainContent');
+    const gallery = user.gallery || [];
     
-    // Filters
-    const interests = [...new Set(users.map(u => u.interest))];
-    const filterDiv = document.getElementById('filters');
-    filterDiv.innerHTML = '<div class="filter active" onclick="filterAll()">All</div>' + 
-      interests.map(i => `<div class="filter" onclick="filterBy('${i}')">${i}</div>`).join('');
-  }
-
-  let currentFilter = 'all';
-  function filterAll() { currentFilter = 'all'; render(); }
-  function filterBy(interest) { currentFilter = interest; render(); }
-
-  function render() {
-    let list = users.filter(u => !currentUser || u.id !== currentUser.id);
-    if (currentFilter !== 'all') list = list.filter(u => u.interest === currentFilter);
-    const grid = document.getElementById('profiles');
-    if (list.length === 0) {
-      grid.innerHTML = '<div style="text-align:center; padding:50px">✨ No one yet. Be the first!</div>';
-      return;
-    }
-    grid.innerHTML = list.map(u => `
-      <div class="profile-card" onclick="viewProfile(${u.id})">
-        <div class="profile-banner"><div class="avatar">${u.avatar || u.username[0]}</div></div>
-        <div class="profile-info">
-          <div class="username">${escape(u.username)} ${u.premium ? '⭐' : ''}</div>
-          <div class="location">📍 ${escape(u.location)} · ${u.age}</div>
-          <div class="bio">${escape((u.bio || '').substring(0, 80))}</div>
-        </div>
+    content.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3>📸 ${escapeHtml(user.username)}'s Gallery</h3>
+        <button class="btn btn-outline" onclick="showPeople()">← Back to People</button>
       </div>
-    `).join('');
-  }
-
-  function viewProfile(id) {
-    const user = users.find(u => u.id === id);
-    if (!user) return;
-    document.getElementById('profileView').innerHTML = `
-      <div style="text-align:center">
-        <div style="font-size:3rem; background:#16161F; width:80px; height:80px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-bottom:15px">${user.avatar || user.username[0]}</div>
-        <h3>${escape(user.username)}</h3>
-        <p style="color:#9A9AAB">${escape(user.location)} · ${user.age} · ${user.interest}</p>
-        <div style="background:#16161F; padding:15px; border-radius:12px; margin:15px 0">${escape(user.bio || 'Looking to meet new people')}</div>
-        ${currentUser ? `<button class="btn btn-primary" onclick="sendMessage(${user.id})">💬 Send Message</button>` : '<button class="btn btn-primary" onclick="openAuth()">Sign in to connect</button>'}
+      <div style="text-align: center; margin-bottom: 30px;">
+        <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: 0 auto;">
+          ${user.profilePicture ? `<img src="${user.profilePicture}" style="width:100%; height:100%; object-fit:cover;">` : `<div style="width:100%; height:100%; background:#16161F; display:flex; align-items:center; justify-content:center; font-size:3rem;">${user.avatar || user.username[0]}</div>`}
+        </div>
+        <h4 style="margin-top: 10px;">@${escapeHtml(user.username)}</h4>
+        <p>${escapeHtml(user.location)} · ${user.age} · ${user.interest}</p>
+        <p class="message info">${escapeHtml(user.bio || "Looking to meet new people!")}</p>
+      </div>
+      <h4>Gallery Photos (${gallery.length})</h4>
+      ${gallery.length === 0 ? '<p class="info">No photos yet.</p>' : ''}
+      <div class="gallery-grid">
+        ${gallery.map((photo, idx) => `
+          <div class="gallery-item" onclick="openLightbox('${photo}')">
+            <img src="${photo}" alt="Gallery photo">
+          </div>
+        `).join('')}
       </div>
     `;
-    document.getElementById('profileModal').classList.add('active');
   }
-
-  function sendMessage(toId) {
-    if (!currentUser) { showToast("Sign in first", true); return; }
-    const msg = prompt("Type your message:");
-    if (!msg) return;
-    if (!currentUser.premium && currentUser.tokens < 5) {
-      showToast("First message costs 5 credits. Buy credits first.", true);
-      openShop();
+  
+  function showMyGallery() {
+    const content = document.getElementById('mainContent');
+    const gallery = currentUser.gallery || [];
+    
+    content.innerHTML = `
+      <h3>📸 My Photo Gallery</h3>
+      <p class="info">Upload photos to show your personality! Others can view your gallery.</p>
+      
+      <input type="file" id="galleryUploadInput" accept="image/*" style="display: none;" onchange="uploadGalleryPhoto(this)">
+      <div class="gallery-grid">
+        ${gallery.map((photo, idx) => `
+          <div class="gallery-item">
+            <img src="${photo}" alt="Gallery photo" onclick="openLightbox('${photo}')">
+            <button class="delete-btn" onclick="event.stopPropagation(); removeGalleryPhoto(${idx})">✕</button>
+          </div>
+        `).join('')}
+        <div class="gallery-item add-photo-btn" onclick="document.getElementById('galleryUploadInput').click()">
+          <span>+</span>
+          <span style="font-size: 12px;">Add Photo</span>
+        </div>
+      </div>
+    `;
+  }
+  
+  function updateProfileDisplay() {
+    const avatarDiv = document.getElementById('sidebarAvatar');
+    const profileImg = document.getElementById('profilePreview');
+    const placeholder = document.getElementById('avatarPlaceholder');
+    
+    if (currentUser.profilePicture) {
+      profileImg.src = currentUser.profilePicture;
+      profileImg.style.display = 'block';
+      placeholder.style.display = 'none';
+    } else {
+      profileImg.style.display = 'none';
+      placeholder.style.display = 'block';
+      placeholder.innerHTML = currentUser.avatar || currentUser.username[0];
+    }
+  }
+  
+  function openLightbox(imageSrc) {
+    document.getElementById('lightboxImg').src = imageSrc;
+    document.getElementById('lightboxModal').classList.add('active');
+  }
+  
+  function closeLightbox() {
+    document.getElementById('lightboxModal').classList.remove('active');
+  }
+  
+  // ============ EMAIL VERIFICATION ============
+  async function sendVerificationEmail(email, username, verificationCode) {
+    if (!emailJSReady) return true;
+    try {
+      const templateParams = {
+        to_email: email,
+        to_name: username,
+        verification_code: verificationCode,
+        message: `Hello ${username}! Your verification code is: ${verificationCode}.`
+      };
+      const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  }
+  
+  function generateVerificationCode() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
+  
+  async function register() {
+    const name = document.getElementById('regName').value.trim();
+    let username = document.getElementById('regUsername').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pwd = document.getElementById('regPassword').value;
+    const location = document.getElementById('regLocation').value.trim();
+    const age = parseInt(document.getElementById('regAge').value);
+    const interest = document.getElementById('regInterest').value;
+    const bio = document.getElementById('regBio').value.trim();
+    const ageCheck = document.getElementById('ageCheck').checked;
+    
+    if (!name || !username || !email || !pwd || !location || !age) {
+      showMessage("Please fill all fields", "error");
       return;
     }
-    if (!currentUser.premium) {
-      currentUser.tokens -= 5;
-      save();
-      update();
+    if (age < 18) { showMessage("Must be 18+", "error"); return; }
+    if (!ageCheck) { showMessage("Confirm you're 18+", "error"); return; }
+    if (users.find(u => u.username === username)) { showMessage("Username taken", "error"); return; }
+    if (users.find(u => u.email === email)) { showMessage("Email already registered", "error"); return; }
+    
+    const verificationCode = generateVerificationCode();
+    const expiresAt = Date.now() + 600000;
+    
+    pendingVerifications[email] = {
+      code: verificationCode,
+      expiresAt: expiresAt,
+      userData: { name, username, email, password: btoa(pwd), age, location, interest, bio, avatar: username[0].toUpperCase(), gallery: [], profilePicture: null }
+    };
+    
+    showMessage("📧 Sending verification email...", "info");
+    const emailSent = await sendVerificationEmail(email, username, verificationCode);
+    
+    if (emailSent) {
+      showMessage(`✓ Verification code sent to ${email}.`, "success");
+      document.getElementById('regForm').style.display = 'none';
+      document.getElementById('verificationMessage').innerHTML = `
+        <div class="message info">
+          <strong>📧 Verification Required</strong><br>
+          We sent a 6-digit code to ${email}.
+        </div>
+        <input type="text" id="verifyCode" placeholder="Enter 6-digit code">
+        <button class="btn btn-primary" style="width:100%; margin-top: 10px;" onclick="verifyAndCompleteRegistration('${email}')">Verify & Complete</button>
+        <button class="btn btn-outline" style="width:100%; margin-top: 10px;" onclick="resendCode('${email}')">Resend Code</button>
+      `;
+    } else {
+      showMessage("Demo mode: Account created without verification.", "info");
+      completeRegistration(email, pendingVerifications[email].userData);
     }
-    messages.push({ from: currentUser.id, to: toId, text: msg, time: Date.now() });
-    showToast("✓ Message sent!");
-    closeProfile();
   }
-
-  function register() {
-    const name = document.getElementById('name').value.trim();
-    let username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const pwd = document.getElementById('password').value;
-    const location = document.getElementById('location').value.trim();
-    const age = parseInt(document.getElementById('age').value);
-    const interest = document.getElementById('interest').value;
-    const bio = document.getElementById('bio').value.trim();
-    const ageCheck = document.getElementById('ageCheck').checked;
-
-    if (!name || !username || !email || !pwd || !location || !age) {
-      showToast("Fill all fields", true); return;
-    }
-    if (age < 18) { showToast("Must be 18+", true); return; }
-    if (!ageCheck) { showToast("Confirm you're 18+", true); return; }
-    if (users.find(u => u.username === username)) { showToast("Username taken", true); return; }
-    if (users.find(u => u.email === email)) { showToast("Email exists", true); return; }
-
+  
+  function verifyAndCompleteRegistration(email) {
+    const enteredCode = document.getElementById('verifyCode').value.trim();
+    const pending = pendingVerifications[email];
+    
+    if (!pending) { showMessage("Verification expired.", "error"); return; }
+    if (Date.now() > pending.expiresAt) { showMessage("Code expired.", "error"); return; }
+    if (enteredCode !== pending.code) { showMessage("Invalid code.", "error"); return; }
+    
+    completeRegistration(email, pending.userData);
+  }
+  
+  function completeRegistration(email, userData) {
     const newUser = {
       id: Date.now(),
-      name, username, email, password: btoa(pwd),
-      age, location, interest, bio,
-      tokens: 20, premium: false, online: true,
-      avatar: username[0].toUpperCase()
+      ...userData,
+      isVerified: true,
+      verifiedAt: new Date().toISOString(),
+      createdAt: Date.now(),
+      gallery: [],
+      profilePicture: null
     };
+    
     users.push(newUser);
     currentUser = { ...newUser, password: undefined };
-    save();
-    update();
-    render();
-    closeAuth();
-    showToast(`Welcome ${username}! You have 20 credits.`);
+    saveData();
+    delete pendingVerifications[email];
+    
+    showMessage(`✓ Welcome ${userData.username}!`, "success");
+    setTimeout(() => {
+      showDashboard();
+      loadPeople();
+    }, 1500);
   }
-
+  
+  async function resendCode(email) {
+    const pending = pendingVerifications[email];
+    if (!pending) { showMessage("No pending registration", "error"); return; }
+    
+    const newCode = generateVerificationCode();
+    pending.code = newCode;
+    pending.expiresAt = Date.now() + 600000;
+    
+    await sendVerificationEmail(email, pending.userData.username, newCode);
+    showMessage(`✓ New code sent to ${email}`, "success");
+  }
+  
   function login() {
     const email = document.getElementById('loginEmail').value.trim();
-    const pwd = document.getElementById('loginPass').value;
+    const pwd = document.getElementById('loginPassword').value;
     const user = users.find(u => u.email === email && u.password === btoa(pwd));
-    if (!user) { showToast("Invalid credentials", true); return; }
+    
+    if (!user) { showMessage("Invalid credentials", "error"); return; }
+    if (!user.isVerified) { showMessage("⚠️ Please verify your email first.", "error"); return; }
+    
     currentUser = { ...user, password: undefined };
-    save();
-    update();
-    render();
-    closeAuth();
-    showToast(`Welcome back ${user.username}`);
-  }
-
-  function buy(amount, price) {
-    if (!currentUser) { showToast("Sign in first", true); closeShop(); openAuth(); return; }
-    if (confirm(`Buy ${amount} credits for $${price}? (Demo)`)) {
-      currentUser.tokens += amount;
-      save();
-      update();
-      showToast(`✓ ${amount} credits added`);
-      closeShop();
-    }
-  }
-
-  function subscribe() {
-    if (!currentUser) { showToast("Sign in first", true); return; }
-    if (confirm("Subscribe for $9.99/month? Unlimited messaging")) {
-      currentUser.premium = true;
-      save();
-      update();
-      showToast("✓ Premium activated!");
-      closeShop();
-    }
-  }
-
-  function openAuth() { document.getElementById('authModal').classList.add('active'); switchRegister(); }
-  function closeAuth() { document.getElementById('authModal').classList.remove('active'); }
-  function switchLogin() { document.getElementById('regForm').style.display = 'none'; document.getElementById('loginForm').style.display = 'block'; document.getElementById('authTitle').innerText = 'Sign In'; }
-  function switchRegister() { document.getElementById('regForm').style.display = 'block'; document.getElementById('loginForm').style.display = 'none'; document.getElementById('authTitle').innerText = 'Create Account'; }
-  function closeProfile() { document.getElementById('profileModal').classList.remove('active'); }
-  function openShop() { document.getElementById('shopModal').classList.add('active'); }
-  function closeShop() { document.getElementById('shopModal').classList.remove('active'); }
-  
-  function showToast(msg, isErr = false) {
-    const t = document.getElementById('toast');
-    t.innerText = msg;
-    t.style.display = 'block';
-    t.style.background = isErr ? '#B85C5C' : '#3A3A4A';
-    setTimeout(() => t.style.display = 'none', 2500);
+    saveData();
+    showDashboard();
+    loadPeople();
   }
   
-  function escape(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { return m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'; }); }
-
-  load();
+  function showAuthModal() {
+    document.getElementById('authModal').style.display = 'block';
+    document.getElementById('dashboard').style.display = 'none';
+    switchToRegister();
+  }
+  
+  function showDashboard() {
+    document.getElementById('authModal').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    
+    document.getElementById('sidebarName').innerHTML = currentUser.username;
+    document.getElementById('sidebarLocation').innerHTML = currentUser.location;
+    updateProfileDisplay();
+    
+    const verificationStatus = document.getElementById('verificationStatus');
+    verificationStatus.innerHTML = currentUser.isVerified ? '<span class="verified-badge">✓ Verified Email</span>' : '<span class="unverified-badge">⚠️ Unverified</span>';
+    
+    showPeople();
+  }
+  
+  function showPeople() {
+    const otherUsers = users.filter(u => u.id !== currentUser.id && u.isVerified);
+    const content = document.getElementById('mainContent');
+    
+    if (otherUsers.length === 0) {
+      content.innerHTML = '<h3>👥 People Near You</h3><p style="text-align:center; padding:40px;">No other verified users yet.</p>';
+      return;
+    }
+    
+    content.innerHTML = `
+      <h3>👥 Verified Members</h3>
+      <div class="people-grid">
+        ${otherUsers.map(user => `
+          <div class="person-card" onclick="viewProfilePhotos(${JSON.stringify(user).replace(/"/g, '&quot;')})">
+            <div class="person-avatar">
+              ${user.profilePicture ? `<img src="${user.profilePicture}" alt="Profile">` : `<span style="font-size:1.8rem;">${user.avatar || user.username[0]}</span>`}
+            </div>
+            <h4>${escapeHtml(user.username)}</h4>
+            <p style="color:#9A9AAB; font-size:0.8rem;">${escapeHtml(user.location)} · ${user.age}</p>
+            <p style="color:#6A6A7A; font-size:0.75rem;">${escapeHtml(user.interest)}</p>
+            <div class="verified-badge" style="margin-top:8px;">✓ Verified</div>
+            <div style="margin-top:8px;"><small>📸 ${(user.gallery || []).length} photos</small></div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+  
+  function showProfile() {
+    const content = document.getElementById('mainContent');
+    content.innerHTML = `
+      <h3>✏️ Edit Your Profile</h3>
+      <div class="info" style="margin-bottom: 15px;">
+        <strong>📸 Profile Picture</strong><br>
+        Click on your avatar in the sidebar to upload a profile picture.
+      </div>
+      <div style="margin-top: 20px;">
+        <label>Username</label>
+        <input type="text" id="editUsername" value="${escapeHtml(currentUser.username)}">
+        <label>Location</label>
+        <input type="text" id="editLocation" value="${escapeHtml(currentUser.location)}">
+        <label>Age</label>
+        <input type="number" id="editAge" value="${currentUser.age}">
+        <label>Interest</label>
+        <select id="editInterest">
+          <option ${currentUser.interest === 'Dating' ? 'selected' : ''}>Dating</option>
+          <option ${currentUser.interest === 'Friendship' ? 'selected' : ''}>Friendship</option>
+          <option ${currentUser.interest === 'Networking' ? 'selected' : ''}>Networking</option>
+          <option ${currentUser.interest === 'Community' ? 'selected' : ''}>Community</option>
+        </select>
+        <label>Bio</label>
+        <textarea id="editBio" rows="3">${escapeHtml(currentUser.bio || '')}</textarea>
+        <button class="btn btn-primary" onclick="updateProfile()">Save Changes</button>
+      </div>
+      <hr>
+      <div class="message info">
+        <strong>✓ Email Verified</strong><br>
+        Your email ${escapeHtml(currentUser.email)} has been verified.
+      </div>
+    `;
+  }
+  
+  function updateProfile() {
+    currentUser.username = document.getElementById('editUsername').value.trim();
+    currentUser.location = document.getElementById('editLocation').value.trim();
+    currentUser.age = parseInt(document.getElementById('editAge').value);
+    currentUser.interest = document.getElementById('editInterest').value;
+    currentUser.bio = document.getElementById('editBio').value.trim();
+    if (!currentUser.profilePicture) {
+      currentUser.avatar = currentUser.username[0].toUpperCase();
+    }
+    
+    const userIndex = users.findIndex(u => u.id === currentUser.id);
+    if (userIndex !== -1) {
+      users[userIndex] = { ...users[userIndex], ...currentUser };
+    }
+    saveData();
+    showMessage("Profile updated!", "success");
+    showProfile();
+    document.getElementById('sidebarName').innerHTML = currentUser.username;
+    updateProfileDisplay();
+  }
+  
+  function logout() {
+    currentUser = null;
+    localStorage.removeItem('connectly_current_user');
+    showAuthModal();
+  }
+  
+  function showMessage(msg, type) {
+    const msgDiv = document.getElementById('verificationMessage');
+    if (msgDiv) {
+      msgDiv.innerHTML = `<div class="message ${type}">${msg}</div>`;
+      setTimeout(() => msgDiv.innerHTML = '', 3000);
+    } else {
+      alert(msg);
+    }
+  }
+  
+  function switchToLogin() {
+    document.getElementById('regForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('authTitle').innerText = 'Sign In';
+    document.getElementById('verificationMessage').innerHTML = '';
+  }
+  
+  function switchToRegister() {
+    document.getElementById('regForm').style.display = 'block';
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('authTitle').innerText = 'Create Account';
+    document.getElementById('verificationMessage').innerHTML = '';
+  }
+  
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      return m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;';
+    });
+  }
+  
+  window.register = register;
+  window.login = login;
+  window.logout = logout;
+  window.showPeople = showPeople;
+  window.showProfile = showProfile;
+  window.showMyGallery = showMyGallery;
+  window.updateProfile = updateProfile;
+  window.showAuthModal = showAuthModal;
+  window.switchToLogin = switchToLogin;
+  window.switchToRegister = switchToRegister;
+  window.verifyAndCompleteRegistration = verifyAndCompleteRegistration;
+  window.resendCode = resendCode;
+  window.uploadProfilePicture = uploadProfilePicture;
+  window.uploadGalleryPhoto = uploadGalleryPhoto;
+  window.removeGalleryPhoto = removeGalleryPhoto;
+  window.viewProfilePhotos = viewProfilePhotos;
+  window.openLightbox = openLightbox;
+  window.closeLightbox = closeLightbox;
+  
+  loadData();
 </script>
 </body>
 </html>
